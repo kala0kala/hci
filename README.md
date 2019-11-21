@@ -5,8 +5,6 @@
 
 Przedmiot prowadzony jest dla studentów 2-ego roku kierunku kognitywistyka na Uniwersytecie Adama Mickiewicza w Poznaniu. :mortar_board:
 
-Polecamy podgląd tego repozytorium w Jupyter nbviewer pod :full_moon: [tym](https://nbviewer.jupyter.org/github/mikbuch/hci/tree/master/) :mag: adresem.
-
 ### :e-mail: Kontakt do prowadzących
 
  * dr inż. Marcin Jukiewicz (koordynator) marcin.jukiewicz[at]amu.edu.pl
