@@ -133,16 +133,16 @@ while gra_trwa:
             lost_game = False
             blink.value = 0
     for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN or blink.value == 1:
+        if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 quit_program.set()
                 gra_trwa = False
-            if (event.key == pygame.K_SPACE or blink.value == 1) and dino_jump == False:
+            if event.key == pygame.K_SPACE and dino_jump == False:
                 game_on = True
                 dino_jump = True
                 jumpSound.play()
                 blink.value = 0
-            if lost_game == True and (event.key == pygame.K_SPACE or blink.value == 1):
+            if lost_game == True and event.key == pygame.K_SPACE:
                 time.sleep(1)
                 clear_game = True
                 lost_game = False
