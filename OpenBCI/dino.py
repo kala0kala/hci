@@ -141,12 +141,10 @@ while gra_trwa:
                 game_on = True
                 dino_jump = True
                 jumpSound.play()
-                blink.value = 0
             if lost_game == True and event.key == pygame.K_SPACE:
                 time.sleep(1)
                 clear_game = True
                 lost_game = False
-                blink.value = 0
 
     #ustawienia początkowe
     if clear_game == True:
