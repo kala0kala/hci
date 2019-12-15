@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import pygame
 import random
 import datetime
@@ -9,13 +11,17 @@ from psychopy import event, visual
 import filterlib as flt
 import blink as blk
 
+global mac_adress
+
+mac_adress = 'e5:32:b4:53:55:ba'
+
 
 def blinks_detector(quit_program, blink, blink_det, blinks_num):
     def detect_blinks(sample):
         smp = sample.channels_data[0]
         smp_flted = frt.filterIIR(smp, 0)
         #print(smp_flted)
-        brt.blink_detect(smp_flted, 32000)
+        brt.blink_detect(smp_flted, 38000)
         # report it the new blink is spotted
         if brt.new_blink:
             if brt.blinks_num == 1:
@@ -42,7 +48,7 @@ def blinks_detector(quit_program, blink, blink_det, blinks_num):
         # blink detection in real time object creation
         brt = blk.BlinkRealTime()
 
-        board = OpenBCIGanglion(mac='e5:32:b4:53:55:ba')
+        board = OpenBCIGanglion(mac=mac_adress)
         board.start_stream(detect_blinks)
 
 quit_program = mp.Event()
