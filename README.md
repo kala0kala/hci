@@ -58,17 +58,17 @@ Wymagania odnośnie raportów:
 | 8   | 02.12   | 26.11   | 28.11       |
 | 9   | 09.12   | 03.12   | 05.12       |
 | 10  | 16.12   | 10.12   | 12.12       |
-| 11  | 23.12   | 17.12   | 19.12       |
-| 12  | 13.01   | 07.01   | 02.01       |
-| 13  | 20.01   | 14.01   | 09.01       |
-| 14  | 27.01** | 21.01   | 16.01       |
+| 11  | 13.01   | 17.12   | 19.12       |
+| 12  | 20.01   | 07.01   | 02.01       |
+| 13  | 27.01   | 14.01   | 09.01       |
+| 14  | ---     | 21.01   | 16.01       |
 | 15  | ***     | 28.01** | 23.01**     |
 
 _* Do tego dnia należy przesłać raport z projektu webowego. Na zajęciach w tym terminie każda dwuosobowa grupa krótko opowie reszcie grupy zajęciowej o swoim projekcie.
 
 _** Do tego dnia należy przesłać projekt z analizy danych. Na zajęciach w tym terminie każda dwuosobowa grupa krótko opowie reszcie grupy zajęciowej o swoim projekcie.
 
-_*** Kwestia różnic w liczbie terminów zostanie rozwiązana po Nowym Roku.
+_*** Grupa zajęciowa nr 1 oraz grupa zajęciowa nr 2 prezentują projekty 28 stycznia.Jeśli ktoś nie będzie mógł być wtedy na zajęciach, projekt bronił będzie na dyżurze 29 stycznia.
 
 #### Informacje dodatkowe
 
