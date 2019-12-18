@@ -12,8 +12,7 @@ import filterlib as flt
 import blink as blk
 
 global mac_adress
-
-mac_adress = 'e5:32:b4:53:55:ba'
+mac_adress = 'd2:b4:11:81:48:ad'
 
 
 def blinks_detector(quit_program, blink, blink_det, blinks_num):
@@ -21,7 +20,8 @@ def blinks_detector(quit_program, blink, blink_det, blinks_num):
         smp = sample.channels_data[0]
         smp_flted = frt.filterIIR(smp, 0)
         #print(smp_flted)
-        brt.blink_detect(smp_flted, 38000)
+
+        brt.blink_detect(smp_flted, -38000)
         # report it the new blink is spotted
         if brt.new_blink:
             if brt.blinks_num == 1:
@@ -60,7 +60,7 @@ connected = mp.Event()
 proc_blink_det = mp.Process(
     name='proc_',
     target=blinks_detector,
-    args=(quit_program, blink, blink_det, blinks_num,)
+    args=(quit_program,  blink_det, blinks_num, blink,)
     )
 
 proc_blink_det.start()
