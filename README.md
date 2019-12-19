@@ -56,10 +56,10 @@ Głównym plikiem, na którym powinni Państwo bazować, jest *templatka.py*. Pl
   - Główna część programu, która powinna zostać rozszerzona znajduje się pierwotnie pomiędzy 88 a 97 linijką kodu. Tam powinien znaleźć się główny kod interfejsu. 
   - Można używać dodatkowych klas.
  
- Pomysł na projekt należy przesłać na maila prowadzącego do **5. stycznia**. 
+ :clock8: Pomysł na projekt należy przesłać na maila prowadzącego do **5. stycznia**. 
 
 
-:clock8: **Uwaga** :office: Zgodnie z regulaminem studiów obowiązują dwie obecności, niezależnie od tego, czy są one usprawiedliwione, czy nie. :blue_book:
+ **Uwaga** :office: Zgodnie z regulaminem studiów obowiązują dwie obecności, niezależnie od tego, czy są one usprawiedliwione, czy nie. :blue_book:
 
 #### Terminarz zajęć
 
