@@ -53,7 +53,7 @@ Głównym plikiem, na którym powinni Państwo bazować, jest *templatka.py*. Pl
 * Informacje dotyczące pliku *templatka.py*:
   - Zmienna *SYMULACJA_SYGNALU* ustala (True/False) czy program ma pobierać dane z Ganglionu, czy symulować wcześniej nagrany sygnał.
   - Po wykryciu mrugnięcia zmienna *blink.value* zmienia wartość na 1.  
-  - Główna część programu, która powinna zostać rozszerzona znajduje się pierwotnie pomiędzy 88 a 97 linijką kodu. Tam powinien znaleźć się główny kod interfejsu. 
+  - Główna część programu, która powinna zostać rozszerzona znajduje się pierwotnie pomiędzy 83 a 97 linijką kodu. Tam powinien znaleźć się główny kod interfejsu. 
   - Można używać dodatkowych klas.
  
  :clock8: Pomysł na projekt należy przesłać na maila prowadzącego do **5. stycznia**. 
