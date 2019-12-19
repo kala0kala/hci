@@ -42,7 +42,7 @@ Wymagania odnośnie raportów:
    - opisy tabel,
    - obecność bibliografii/źródeł.
    
-## Wymaganie szczegółowe dot. projektu II
+### Wymaganie szczegółowe dot. projektu II
 
 Projekt zakłada stworzenie interfejsu gry lub oprogramowania użytkowego sterowanego przy pomocy mrugnięć. Zadanie polega na rozwinięciu programu znajdującego się w folderze Templatka_projekt2. Dwie opcje rozwoju projektu to:
  - stworzenie własnego interfejsu w oparciu o pythona z wykorzytaniem paczek psychopy/pygame (maksymana ocena **5**)
