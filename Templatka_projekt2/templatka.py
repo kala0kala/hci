@@ -2,7 +2,6 @@
 
 from psychopy import visual, event, core
 import multiprocessing as mp
-import aseegg as ag
 from pyOpenBCI import OpenBCIGanglion
 import pygame as pg
 import pandas as pd
