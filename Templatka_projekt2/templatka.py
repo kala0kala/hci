@@ -79,23 +79,23 @@ print('subprocess started')
 ############################################
 # Poniżej należy dodać rozwinięcie programu
 ############################################
+if __name__ == "__main__":
+    win = visual.Window(
+        size=[500, 500],
+        units="pix",
+        fullscr=False
+    )
 
-win = visual.Window(
-    size=[500, 500],
-    units="pix",
-    fullscr=False
-)
+    while True:
+        if blink.value == 1:
+            print('BLINK!')
+            blink.value = 0
 
-while True:
-    if blink.value == 1:
-        print('BLINK!')
-        blink.value = 0
-
-    if 'escape' in event.getKeys():
-        print('quitting')
-        quit_program.set()
-    if quit_program.is_set():
-        break
+        if 'escape' in event.getKeys():
+            print('quitting')
+            quit_program.set()
+        if quit_program.is_set():
+            break
 
 # Zakończenie podprocesów
 proc_blink_det.join()
