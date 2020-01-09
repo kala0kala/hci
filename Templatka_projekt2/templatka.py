@@ -2,7 +2,6 @@
 
 from psychopy import visual, event, core
 import multiprocessing as mp
-from pyOpenBCI import OpenBCIGanglion
 import pygame as pg
 import pandas as pd
 import filterlib as flt
@@ -13,6 +12,8 @@ global mac_adress, SYMULACJA_SYGNALU
 #######################
 SYMULACJA_SYGNALU = True
 #######################
+if not SYMULACJA_SYGNALU:
+    from pyOpenBCI import OpenBCIGanglion
 
 mac_adress = 'd2:b4:11:81:48:ad'
 
