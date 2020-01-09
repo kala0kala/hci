@@ -14,7 +14,7 @@ global mac_adress
 mac_adress = 'd2:b4:11:81:48:ad'
 
 
-def blinks_detector(quit_program, blink, blink_det, blinks_num):
+def blinks_detector(quit_program, blink_det, blinks_num, blink):
     def detect_blinks(sample):
         smp = sample.channels_data[0]
         smp_flted = frt.filterIIR(smp, 0)
