@@ -7,6 +7,15 @@ import pandas as pd
 import filterlib as flt
 import blink as blk
 
+global mac_adress, SYMULACJA_SYGNALU
+
+#######################
+SYMULACJA_SYGNALU = True
+#######################
+if not SYMULACJA_SYGNALU:
+    from pyOpenBCI import OpenBCIGanglion
+
+mac_adress = 'd2:b4:11:81:48:ad'
 
 def blinks_detector(quit_program, blink_det, blinks_num, blink):
     def detect_blinks(sample):
@@ -50,39 +59,27 @@ def blinks_detector(quit_program, blink_det, blinks_num, blink):
         else:
             board = OpenBCIGanglion(mac=mac_adress)
             board.start_stream(detect_blinks)
-if __name__ == "__main__":
 
-    global mac_adress, SYMULACJA_SYGNALU
+blink_det = mp.Queue()
+blink = mp.Value('i', 0)
+blinks_num = mp.Value('i', 0)
+connected = mp.Event()
+quit_program = mp.Event()
 
-    #######################
-    SYMULACJA_SYGNALU = True
-    #######################
-    if not SYMULACJA_SYGNALU:
-        from pyOpenBCI import OpenBCIGanglion
+proc_blink_det = mp.Process(
+    name='proc_',
+    target=blinks_detector,
+    args=(quit_program, blink_det, blinks_num, blink,)
+    )
 
-    mac_adress = 'd2:b4:11:81:48:ad'
-
-
-    blink_det = mp.Queue()
-    blink = mp.Value('i', 0)
-    blinks_num = mp.Value('i', 0)
-    connected = mp.Event()
-    quit_program = mp.Event()
-
-    proc_blink_det = mp.Process(
-        name='proc_',
-        target=blinks_detector,
-        args=(quit_program, blink_det, blinks_num, blink,)
-        )
-
-    # rozpoczęcie podprocesu
-    proc_blink_det.start()
-    print('subprocess started')
+# rozpoczęcie podprocesu
+proc_blink_det.start()
+print('subprocess started')
 
 ############################################
 # Poniżej należy dodać rozwinięcie programu
 ############################################
-
+if __name__ == "__main__":
     win = visual.Window(
         size=[500, 500],
         units="pix",
@@ -101,4 +98,4 @@ if __name__ == "__main__":
             break
 
 # Zakończenie podprocesów
-    proc_blink_det.join()
+proc_blink_det.join()
