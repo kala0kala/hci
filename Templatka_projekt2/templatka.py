@@ -9,8 +9,6 @@ import blink as blk
 #from pyOpenBCI import OpenBCIGanglion
 
 
-
-
 def blinks_detector(quit_program, blink_det, blinks_num, blink,):
     def detect_blinks(sample):
         if SYMULACJA_SYGNALU:
@@ -34,6 +32,8 @@ def blinks_detector(quit_program, blink_det, blinks_num, blink,):
             if not SYMULACJA_SYGNALU:
                 print('Disconnect signal sent...')
                 board.stop_stream()
+                
+                
 ####################################################
     SYMULACJA_SYGNALU = True
 ####################################################
@@ -90,7 +90,6 @@ if __name__ == "__main__":
         if blink.value == 1:
             print('BLINK!')
             blink.value = 0
-
         if 'escape' in event.getKeys():
             print('quitting')
             quit_program.set()
