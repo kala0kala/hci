@@ -45,13 +45,13 @@ Wymagania odnośnie raportów:
 #### Wymaganie szczegółowe dot. projektu II
 
 Projekt zakłada stworzenie interfejsu gry lub oprogramowania użytkowego sterowanego przy pomocy mrugnięć. Zadanie polega na rozwinięciu programu znajdującego się w folderze Templatka_projekt2. Dwie opcje rozwoju projektu to:
- * stworzenie własnego interfejsu w oparciu o pythona z wykorzytaniem paczek psychopy/pygame/Tkinter (maksymana ocena **5**)
+ * stworzenie własnego interfejsu (gry) w oparciu o pythona z wykorzytaniem paczek psychopy/pygame/Tkinter i zintegrowanie go z programem do wykrywania mrugnięć(maksymana ocena **5**)
  * znalezenie oprogramowania/gry w języku python i zintegrowanie go z programem do wykrywania mrugnięć (maksymalna ocena **4**)
 
 Głównym plikiem, na którym powinni Państwo bazować, jest *templatka.py*. Plik *filterlib.py* służy do filtracji sygnału, natomiast plik *blink.py* do wykrywania mrugnięć.
 
 * Informacje dotyczące pliku *templatka.py*:
-  - Zmienna *SYMULACJA_SYGNALU* ustala (True/False) czy program ma pobierać dane z Ganglionu, czy symulować wcześniej nagrany sygnał.
+  - Zmienna *SYMULACJA_SYGNALU* ustala (True/False) czy program ma pobierać dane z Ganglionu, czy symulować wcześniej nagrany sygnał (przy pobieraniu danych z Ganglionu należy również odkomentować linijkę *from pyOpenBCI import OpenBCIGanglion*.
   - Po wykryciu mrugnięcia zmienna *blink.value* zmienia wartość na 1.  
   - Główna część programu, która powinna zostać rozszerzona znajduje się pierwotnie pomiędzy 83 a 97 linijką kodu. Tam powinien znaleźć się główny kod interfejsu. 
   - Można używać dodatkowych klas.
