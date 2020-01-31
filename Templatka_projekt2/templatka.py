@@ -8,7 +8,6 @@ import filterlib as flt
 import blink as blk
 #from pyOpenBCI import OpenBCIGanglion
 
-
 def blinks_detector(quit_program, blink_det, blinks_num, blink,):
     def detect_blinks(sample):
         if SYMULACJA_SYGNALU:
@@ -16,7 +15,6 @@ def blinks_detector(quit_program, blink_det, blinks_num, blink,):
         else:
             smp = sample.channels_data[0]
             smp_flted = frt.filterIIR(smp, 0)
-        #print(smp_flted)
 
         brt.blink_detect(smp_flted, -38000)
         if brt.new_blink:
@@ -32,10 +30,59 @@ def blinks_detector(quit_program, blink_det, blinks_num, blink,):
             if not SYMULACJA_SYGNALU:
                 print('Disconnect signal sent...')
                 board.stop_stream()
-                
-                
+
+    def draw_signal(sample):
+        for event in pg.event.get():
+            pass
+
+        detect_blinks(sample)
+
+        if not SYMULACJA_SYGNALU:
+            smp = sample.channels_data[0]
+            sample = frt.filterIIR(smp, 0)
+
+        oldview = screen.copy()
+        screen.fill((0xff, 0xff, 0xff))
+        screen.blit(oldview, toleft)
+
+        values["all"].append(sample)
+        if values["all"][0] == values["range"][0]:
+            values["range"][0] = min(values["all"][1:])
+            redraw_all(screen, values)
+        if values["all"][0] == values["range"][1]:
+            values["range"][1] = max(values["all"][1:])
+            redraw_all(screen, values)
+        values["all"] = values["all"][1:]
+
+        if sample < values["range"][0]:
+            values["range"][0] = sample
+            redraw_all(screen, values)
+        if sample > values["range"][1]:
+            values["range"][1] = sample
+            redraw_all(screen, values)
+
+        sample = int(map_value(sample, values["range"], RANGE))
+        pg.draw.line(screen, (0x0, 0x0, 0x0), (WIDTH-2, values["last"]), (WIDTH-1, sample), 3)
+        pg.display.update()
+
+        values["last"] = sample
+
+    def map_value(x, a, b):
+        return (x-a[0])*((b[1]-b[0])/(a[1]-a[0]))+b[0]
+
+    def redraw_all(display, values):
+        display.fill((0xff, 0xff, 0xff))
+        mapped = []
+        for v in values["all"]:
+            mapped.append(map_value(v, values["range"], RANGE))
+        for i in range(len(mapped)-2):
+            pg.draw.line(screen, (0x0, 0x0, 0x0), (i, mapped[i]), (i+1, mapped[i+1]), 3)
+        pg.display.update()
+
 ####################################################
     SYMULACJA_SYGNALU = True
+####################################################
+    RYSOWANIE_WYKRESU = True
 ####################################################
     mac_adress = 'd2:b4:11:81:48:ad'
 ####################################################
@@ -44,18 +91,40 @@ def blinks_detector(quit_program, blink_det, blinks_num, blink,):
     frt = flt.FltRealTime()
     brt = blk.BlinkRealTime()
 
+    if RYSOWANIE_WYKRESU:
+        WIDTH, HEIGHT = 900, 550
+        RANGE = (HEIGHT-20, 20)
+        WHITE = (0xff, 0xff, 0xff)
+        BLACK = (0x00, 0x00, 0x00)
+
+        pg.init()
+        pg.display.set_caption("graph")
+        screen = pg.display.set_mode((WIDTH, HEIGHT))
+        screen.fill((0xff, 0xff, 0xff))
+        toleft = pg.Rect(-1, 0, WIDTH, HEIGHT)
+
+        values = {
+            "last": 0,
+            "range": [0, 0],
+            "all": [0]*WIDTH,
+        }
+
+        main_func = draw_signal
+    else:
+        main_func = detect_blinks
+
     if SYMULACJA_SYGNALU:
         df = pd.read_csv('dane_do_symulacji/data.csv')
         for sample in df['signal']:
             if quit_program.is_set():
                 break
-            detect_blinks(sample)
+            main_func(sample)
             clock.tick(200)
         print('KONIEC SYGNAŁU')
         quit_program.set()
     else:
         board = OpenBCIGanglion(mac=mac_adress)
-        board.start_stream(detect_blinks)
+        board.start_stream(main_func)
 
 if __name__ == "__main__":
 
@@ -70,7 +139,7 @@ if __name__ == "__main__":
         name='proc_',
         target=blinks_detector,
         args=(quit_program, blink_det, blinks_num, blink,)
-        )
+    )
 
     # rozpoczęcie podprocesu
     proc_blink_det.start()
