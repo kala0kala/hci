@@ -42,7 +42,7 @@ def blinks_detector(quit_program, blink_det, blinks_num, blink,):
             sample = frt.filterIIR(smp, 0)
 
         oldview = screen.copy()
-        screen.fill((0xff, 0xff, 0xff))
+        screen.fill(WHITE)
         screen.blit(oldview, toleft)
 
         values["all"].append(sample)
@@ -61,8 +61,12 @@ def blinks_detector(quit_program, blink_det, blinks_num, blink,):
             values["range"][1] = sample
             redraw_all(screen, values)
 
+        zero = int(map_value(0, values["range"], RANGE))
+        pg.draw.line(screen, BLACK, (WIDTH-2, zero), (WIDTH-1, zero), 1)
+
         sample = int(map_value(sample, values["range"], RANGE))
-        pg.draw.line(screen, (0x0, 0x0, 0x0), (WIDTH-2, values["last"]), (WIDTH-1, sample), 3)
+        pg.draw.line(screen, BLUE, (WIDTH-2, values["last"]), (WIDTH-1, sample), 3)
+
         pg.display.update()
 
         values["last"] = sample
@@ -71,12 +75,15 @@ def blinks_detector(quit_program, blink_det, blinks_num, blink,):
         return (x-a[0])*((b[1]-b[0])/(a[1]-a[0]))+b[0]
 
     def redraw_all(display, values):
-        display.fill((0xff, 0xff, 0xff))
+        display.fill(WHITE)
         mapped = []
         for v in values["all"]:
             mapped.append(map_value(v, values["range"], RANGE))
+
+        zero = int(map_value(0, values["range"], RANGE))
+        pg.draw.line(screen, BLACK, (0, zero), (WIDTH-1, zero), 1)
         for i in range(len(mapped)-2):
-            pg.draw.line(screen, (0x0, 0x0, 0x0), (i, mapped[i]), (i+1, mapped[i+1]), 3)
+            pg.draw.line(screen, BLUE, (i, mapped[i]), (i+1, mapped[i+1]), 3)
         pg.display.update()
 
 ####################################################
@@ -96,11 +103,12 @@ def blinks_detector(quit_program, blink_det, blinks_num, blink,):
         RANGE = (HEIGHT-20, 20)
         WHITE = (0xff, 0xff, 0xff)
         BLACK = (0x00, 0x00, 0x00)
+        BLUE = (0x00, 0x00, 0xff)
 
         pg.init()
         pg.display.set_caption("graph")
         screen = pg.display.set_mode((WIDTH, HEIGHT))
-        screen.fill((0xff, 0xff, 0xff))
+        screen.fill(WHITE)
         toleft = pg.Rect(-1, 0, WIDTH, HEIGHT)
 
         values = {
